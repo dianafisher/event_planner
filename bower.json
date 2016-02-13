@@ -4,7 +4,8 @@
   "dependencies": {
     "bootstrap-sass": "~3.3.5",
     "backbonefire": "^0.5.1",
-    "requirejs": "^2.1.22"
+    "requirejs": "^2.1.22",
+    "text": "requirejs-text#^2.0.14"
   },
   "overrides": {
     "bootstrap-sass": {

@@ -1,9 +1,63 @@
 /*global Firebase*/
+/*global Backbone*/
 /*global $*/
+/*global _*/
+/*global document*/
 /*global console*/
+/*global alert*/
 /*eslint no-undef: 2*/
-
+/*eslint no-new: 2*/
+/*eslint no-alert: 2*/
 'use strict';
+
+var app = {
+    views: {},
+    models: {},
+
+    loadTemplates: function(views, callback) {
+        var deferreds = [];
+        $.each(views, function(index, view) {
+            if (app[view]) {
+                deferreds.push($.get('templates/' + view + '.html', function(data) {
+                    app[view].prototype.template = _.template(data);
+                }, 'html'));
+            } else {
+                console.error(view + ' not found');
+            }
+        });
+
+        $.when.apply(null, deferreds).done(callback);
+
+    }
+};
+
+app.Router = Backbone.Router.extend({
+
+    routes: {
+        '': 'index',
+        '*filter': 'setFilter'
+    },
+
+    initialize: function() {
+        console.log('initialized');
+    },
+
+    index: function() {
+        console.log('index');
+        var todos = new app.TodosCollection();
+        // todos.fetch();
+        app.StatsView = new app.StatsView({ collection: todos });
+    },
+
+    setFilter: function (param) {
+        // Set the current filter to be used
+        app.TodoFilter = param || '';
+
+        // Trigger a collection filter event, causing hiding/unhiding
+        // of the Todo view items
+        app.trigger('filter');
+    }
+});
 
 console.log('\'Allo \'Allo!');
 
@@ -28,4 +82,16 @@ myFirebaseRef.on('child_added', function(snapshot) {
   // Extract the message data from the snapshot
     var message = snapshot.val();
     console.log(message);
+});
+
+
+$(document).on('ready', function () {
+
+    app.loadTemplates([
+           'TodoView', 'StatsView'
+        ],
+        function () {
+            app.router = new app.Router();
+            Backbone.history.start();
+        });
 });

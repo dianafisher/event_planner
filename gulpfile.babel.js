@@ -33,6 +33,46 @@ gulp.task('scripts', () => {
     .pipe(reload({stream: true}));
 });
 
+gulp.task('scripts-models', () => {
+  return gulp.src('app/scripts/models/**/*.js')
+    .pipe($.plumber())
+    .pipe($.sourcemaps.init())
+    .pipe($.babel())
+    .pipe($.sourcemaps.write('.'))
+    .pipe(gulp.dest('.tmp/scripts/models'))
+    .pipe(reload({stream: true}));
+});
+
+gulp.task('scripts-views', () => {
+  return gulp.src('app/scripts/views/**/*.js')
+    .pipe($.plumber())
+    .pipe($.sourcemaps.init())
+    .pipe($.babel())
+    .pipe($.sourcemaps.write('.'))
+    .pipe(gulp.dest('.tmp/scripts/views'))
+    .pipe(reload({stream: true}));
+});
+
+gulp.task('scripts-collections', () => {
+  return gulp.src('app/scripts/collections/**/*.js')
+    .pipe($.plumber())
+    .pipe($.sourcemaps.init())
+    .pipe($.babel())
+    .pipe($.sourcemaps.write('.'))
+    .pipe(gulp.dest('.tmp/scripts/collections'))
+    .pipe(reload({stream: true}));
+});
+
+gulp.task('scripts-routers', () => {
+  return gulp.src('app/scripts/routers/**/*.js')
+    .pipe($.plumber())
+    .pipe($.sourcemaps.init())
+    .pipe($.babel())
+    .pipe($.sourcemaps.write('.'))
+    .pipe(gulp.dest('.tmp/scripts/routers'))
+    .pipe(reload({stream: true}));
+});
+
 function lint(files, options) {
   return () => {
     return gulp.src(files)
@@ -108,13 +148,13 @@ gulp.task('serve', ['styles', 'scripts', 'fonts'], () => {
 
   gulp.watch([
     'app/*.html',
-    '.tmp/scripts/**/*.js',
+    '.tmp/scripts/**/*.js',    
     'app/images/**/*',
     '.tmp/fonts/**/*'
   ]).on('change', reload);
 
   gulp.watch('app/styles/**/*.scss', ['styles']);
-  gulp.watch('app/scripts/**/*.js', ['scripts']);
+  gulp.watch('app/scripts/**/*.js', ['scripts']);  
   gulp.watch('app/fonts/**/*', ['fonts']);
   gulp.watch('bower.json', ['wiredep', 'fonts']);
 });
@@ -137,7 +177,7 @@ gulp.task('serve:test', ['scripts'], () => {
     server: {
       baseDir: 'test',
       routes: {
-        '/scripts': '.tmp/scripts',
+        '/scripts': '.tmp/scripts',        
         '/bower_components': 'bower_components'
       }
     }
