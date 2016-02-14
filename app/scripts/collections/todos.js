@@ -28,3 +28,5 @@ app.TodosCollection = Backbone.Firebase.Collection.extend({
     // Todos are sorted by their original insertion order.
     comparator: 'order'
 });
+
+app.Todos = new app.TodosCollection();

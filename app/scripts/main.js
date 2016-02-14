@@ -6,7 +6,7 @@
 /*global console*/
 /*global alert*/
 /*eslint no-undef: 2*/
-/*eslint no-new: 2*/
+/*eslint no-new: 0*/
 /*eslint no-alert: 2*/
 'use strict';
 
@@ -34,28 +34,26 @@ var app = {
 app.Router = Backbone.Router.extend({
 
     routes: {
-        '': 'index',
         '*filter': 'setFilter'
     },
 
     initialize: function() {
         console.log('initialized');
+        new app.StatsView({ collection: app.Todos });
     },
 
     index: function() {
         console.log('index');
-        var todos = new app.TodosCollection();
-        // todos.fetch();
-        app.StatsView = new app.StatsView({ collection: todos });
     },
 
     setFilter: function (param) {
         // Set the current filter to be used
+        console.log('param', param);
         app.TodoFilter = param || '';
 
         // Trigger a collection filter event, causing hiding/unhiding
         // of the Todo view items
-        app.trigger('filter');
+        app.Todos.trigger('filter');
     }
 });
 

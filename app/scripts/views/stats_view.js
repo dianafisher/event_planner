@@ -1,6 +1,5 @@
 /*global app*/
 /*global Backbone*/
-/*global TodoFilter*/
 /*global _*/
 
 'use strict';
@@ -12,11 +11,14 @@ app.StatsView = Backbone.View.extend({
     // the App already present in the HTML.
     el: '#todoapp',
 
+    ENTER_KEY: 13,
+    ESCAPE_KEY: 27,
+
     // Delegated events for creating new items, and clearing completed ones.
     events: {
-        'keypress #new-todo':       'createOnEnter',
-        'click #clear-completed':   'clearCompleted',
-        'click #toggle-all':        'toggleAllComplete'
+        'keypress #new-todo': 'createOnEnter',
+        'click #clear-completed': 'clearCompleted',
+        'click #toggle-all': 'toggleAllComplete'
     },
 
     // At initialization we bind to the relevant events on the `this.collection`
@@ -55,8 +57,7 @@ app.StatsView = Backbone.View.extend({
 
             this.$('#filters li a')
                 .removeClass('selected')
-                .filter('[href="#/' + ('') + '"]')
-                //.filter('[href="#/' + (app.TodoFilter || '') + '"]')
+                .filter('[href="#/' + (app.TodoFilter || '') + '"]')
                 .addClass('selected');
         } else {
             this.$main.hide();
@@ -99,7 +100,7 @@ app.StatsView = Backbone.View.extend({
     // If you hit return in the main input field, create new **Todo** model,
     // persisting it to *localStorage*.
     createOnEnter: function (e) {
-        if (e.which !== app.ENTER_KEY || !this.$input.val().trim()) {
+        if (e.which !== this.ENTER_KEY || !this.$input.val().trim()) {
             return;
         }
 

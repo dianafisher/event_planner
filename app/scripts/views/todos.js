@@ -1,7 +1,6 @@
 
 /*global Backbone*/
 /*global app*/
-/*global TodoFilter*/
 /*global ENTER_KEY*/
 /*global ESCAPE_KEY*/
 'use strict';
@@ -12,7 +11,6 @@ app.TodoView = Backbone.View.extend({
 
     ENTER_KEY: 13,
     ESCAPE_KEY: 27,
-    TodoFilter: 'active',
 
     // The DOM events specific to an item.
     events: {
@@ -49,11 +47,11 @@ app.TodoView = Backbone.View.extend({
 
     isHidden: function () {
         var isCompleted = this.model.get('completed');
-        return isCompleted;
-        // return (// hidden cases only
-        //     (!isCompleted && TodoFilter === 'completed') ||
-        //     (isCompleted && TodoFilter === 'active')
-        // );
+
+        return (// hidden cases only
+            (!isCompleted && app.TodoFilter === 'completed') ||
+            (isCompleted && app.TodoFilter === 'active')
+        );
     },
 
     // Toggle the `"completed"` state of the model.
@@ -90,7 +88,7 @@ app.TodoView = Backbone.View.extend({
 
     // If you hit `enter`, we're through editing the item.
     updateOnEnter: function (e) {
-        if (e.keyCode === ENTER_KEY) {
+        if (e.keyCode === this.ENTER_KEY) {
             this.close();
         }
     },
@@ -98,7 +96,7 @@ app.TodoView = Backbone.View.extend({
     // If you're pressing `escape` we revert your change by simply leaving
     // the `editing` state.
     revertOnEscape: function (e) {
-        if (e.which === ESCAPE_KEY) {
+        if (e.which === this.ESCAPE_KEY) {
             this.$el.removeClass('editing');
             // Also reset the hidden input back to the original value.
             this.$input.val(this.model.get('title'));
