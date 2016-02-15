@@ -17,27 +17,31 @@
     <!-- build:css styles/main.css -->
     <link rel="stylesheet" href="styles/main.css">
     <!-- endbuild -->
-    
+
+
   </head>
   <body>
     <!--[if lt IE 10]>
       <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
     
-    <div class="container">
+    <div class="container" id="app">
       <div class="header">
-        <ul class="nav nav-pills pull-right">
-          <li class="active"><a href="#">Home</a></li>
-          <li><a href="#">About</a></li>
-          <li><a href="#">Contact</a></li>
+        <ul class="nav nav-pills pull-right">          
+          <li class="active"><a href="#">Log in</a></li>
+          <li class="active"><a href="#">Sign Up</a></li>
         </ul>
-        <h3 class="text-muted">Event Planner</h3>
+        <h3 class="text">Event Planner</h3>
       </div>
 
+      <a href='index.html' class='brand brand--top'>
+        <img src='images/cute-unicorn.jpg' alt='Unicorn' class='brand-img img-responsive' />
+      </a>
+
       <div class="jumbotron">
-        <h1>'Allo, 'Allo!</h1>
-        <p class="lead">Always a pleasure scaffolding your apps.</p>
-        <p><a class="btn btn-lg btn-success" href="#">Splendid!</a></p>
+        <h1>Event Planner</h1>
+        <p class="lead">Helping you plan your events, or find events planned by others!</p>
+        <p><a class="btn btn-lg btn-success" href="#">Sign me up!</a></p>
       </div>
 
       <div class="row marketing">
@@ -52,6 +56,31 @@
           <p>Sleek, intuitive, and powerful mobile first front-end framework for faster and easier web development.</p>
         </div>
       </div>
+             
+      <div class='card card--a card--l'>
+          <div class='quiz'>
+            <div class='question'>
+              <h2>What do you value the most?</h2>
+              <ul class='has-answer'>
+                <li class='answer'><a href='#' class='answer-link'>Intelligence</a></li>
+                <li class='answer'><a href='#' class='answer-link'>Friendship</a></li>
+                <li class='answer'><a href='#' class='answer-link'>Power</a></li>
+                <li class='answer'><a href='#' class='answer-link'>Candy</a></li>
+              </ul>
+              
+              <div class='tac'>
+                <a href='quiz.html' class='btn btn--a btn-success'>Start Quiz</a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      <section id="eventapp">
+        <header>
+          <h1>Create an Account</h1>
+        </header>
+        <div id="account"></div>
+      </section>
 
       <section id="todoapp">
       <header id="header">
@@ -100,6 +129,7 @@
    <!-- Views -->
     <script src="scripts/views/todos.js"></script>
     <script src="scripts/views/stats_view.js"></script>
+    <script src="scripts/views/account_view.js"></script>
  
    <!-- Collections -->
     <script src="scripts/collections/todos.js"></script>

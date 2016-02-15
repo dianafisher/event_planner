@@ -4,6 +4,8 @@ $icon-font-path: '../fonts/';
 @import "bower_components/bootstrap-sass/assets/stylesheets/_bootstrap.scss";
 // endbower
 
+@import 'http://fonts.googleapis.com/css?family=Open+Sans:300,400,700';
+
 .browserupgrade {
   margin: 0.2em 0;
   background: #ccc;
@@ -15,6 +17,11 @@ $icon-font-path: '../fonts/';
 body {
   padding-top: 20px;
   padding-bottom: 20px;
+  background: #92539f;
+  color: #fff;
+  font-family: "Open Sans", Helvetica, Arial, sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
 }
 
 /* Everything but the jumbotron gets side spacing for mobile first views */
@@ -35,6 +42,7 @@ body {
     margin-bottom: 0;
     line-height: 40px;
     padding-bottom: 19px;
+    font-size: 125%;
   }
 }
 
@@ -52,6 +60,7 @@ body {
 /* Main marketing message and sign up button */
 .jumbotron {
   text-align: center;
+  color: #333;
   border-bottom: 1px solid #e5e5e5;
   .btn {
     font-size: 21px;
@@ -91,3 +100,156 @@ body {
     border-bottom: 0;
   }
 }
+
+li {
+  margin-bottom: 0.625em;
+  margin-top: 0;
+}
+
+a {
+  color: #92539f;
+  text-decoration: none;
+}
+a:active, a:focus, a:hover {
+  color: #73427d;
+}
+img {
+  display: block;
+  max-width: 100%;
+}
+.has-answer {
+  list-style-type: none;
+  margin: 0;
+  margin-bottom: 1.25em;
+  padding: 0;
+}
+.answer {
+  font-weight: 700;
+}
+
+.answer-link {
+  border: 2px solid #ddd;
+  border-radius: 6px;
+  color: #333;
+  display: block;
+  font-size: 90%;
+  padding: 0.625em;
+  padding-left: 2.5em;
+  position: relative;
+}
+
+@media screen and (min-width: 768px) {
+  .answer-link {
+    font-size: 100%;
+  }
+}
+.answer-link:active, .answer-link:focus, .answer-link:hover, .answer-link.is-selected {
+  border-color: #92539f;
+  color: #333;
+}
+.answer-link.is-selected::before {
+  background: #92539f;
+  color: #333;
+}
+.answer-link::before {
+  background: #ddd;
+  border-radius: 50%;
+  content: '';
+  display: block;
+  height: 20px;
+  left: 0.625em;
+  position: absolute;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  transform: translateY(-50%);
+  width: 20px;
+}
+
+.btn {  
+  border-bottom: 4px solid rgba(0, 0, 0, 0.1);
+  border-radius: 40px;
+  border: 0;
+  color: #faf6fa;
+  cursor: pointer;
+  display: inline-block;
+  font-weight: bold;
+  line-height: 3;
+  overflow: hidden;
+  padding: 0 2.5em;
+  position: relative;
+}
+.btn:active, .btn:focus, .btn:hover {
+  background: #73427d;
+  color: #fff;
+}
+.btn--b {
+  background: #de3a95;
+  line-height: 2.5;
+}
+.btn--b:active, .btn--b:focus, .btn--b:hover {
+  background: #c4217b;
+  color: #fff;
+}
+.btn[disabled] {
+  opacity: 0.4;
+}
+.btn[disabled]:active, .btn[disabled]:focus, .btn[disabled]:hover {
+  background: #92539f;
+  color: #fff;
+}
+
+.brand {
+  display: block;
+  text-align: center;
+}
+.brand--bottom {
+  margin-top: 2.5em;
+  opacity: 0.45;
+}
+.brand--bottom:active, .brand--bottom:focus, .brand--bottom:hover {
+  opacity: 1;
+}
+.brand--top {
+  margin-bottom: 2.5em;
+}
+.brand-img {
+  display: block;
+  margin: 0 auto;
+  border-radius: 50%;
+}
+
+.card {
+  padding: 1.25em;
+  position: relative;
+}
+@media screen and (min-width: 768px) {
+  .card {
+    border-radius: 6px;
+  }
+}
+.card--a {
+  background: #fff;
+  box-shadow: 0 0 6px rgba(0, 0, 0, 0.5);
+}
+
+.card--b {
+  border: 2px solid #ddd;
+}
+.card--l {
+  padding: 1.25em;
+}
+@media screen and (min-width: 768px) {
+  .card--l {
+    padding: 2.5em;
+  }
+}
+.cell {
+  margin: 2.5em auto 5em;
+  max-width: 50em;
+}
+.tac {
+  text-align: center;
+}
+
+
+

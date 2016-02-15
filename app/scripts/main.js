@@ -34,12 +34,14 @@ var app = {
 app.Router = Backbone.Router.extend({
 
     routes: {
-        '*filter': 'setFilter'
+        // '*filter': 'setFilter'
     },
 
     initialize: function() {
         console.log('initialized');
-        new app.StatsView({ collection: app.Todos });
+        var accountView = new app.AccountView();
+        $('#eventapp').append(accountView.render().el);
+        // new app.StatsView({ collection: app.Todos });
     },
 
     index: function() {
@@ -86,7 +88,7 @@ myFirebaseRef.on('child_added', function(snapshot) {
 $(document).on('ready', function () {
 
     app.loadTemplates([
-           'TodoView', 'StatsView'
+           'TodoView', 'StatsView', 'AccountView'
         ],
         function () {
             app.router = new app.Router();

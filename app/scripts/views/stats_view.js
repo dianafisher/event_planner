@@ -4,7 +4,7 @@
 
 'use strict';
 
-// Our overall **AppView** is the top-level piece of UI.
+// Our overall **StatsView** is the top-level piece of UI.
 app.StatsView = Backbone.View.extend({
 
     // Instead of generating a new element, bind to the existing skeleton of

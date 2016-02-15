@@ -1,8 +1,7 @@
 
 /*global Backbone*/
 /*global app*/
-/*global ENTER_KEY*/
-/*global ESCAPE_KEY*/
+
 'use strict';
 
 app.TodoView = Backbone.View.extend({
