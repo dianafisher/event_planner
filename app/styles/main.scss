@@ -16,9 +16,7 @@ $icon-font-path: '../fonts/';
 /* Space out content a bit */
 body {
   padding-top: 20px;
-  padding-bottom: 20px;
-  background: #92539f;
-  color: #fff;
+  padding-bottom: 20px;  
   font-family: "Open Sans", Helvetica, Arial, sans-serif;
   font-size: 16px;
   line-height: 1.5;
@@ -111,15 +109,15 @@ ul {
 }
 
 time {
-  color: #92539f;
+  color: #5cb85c;
 }
 
 a {
-  color: #92539f;
+  color: #5cb85c;
   text-decoration: none;
 }
 a:active, a:focus, a:hover {
-  color: #73427d;
+  color: #5cb85c;
 }
 img {
   display: block;
@@ -134,7 +132,6 @@ img {
 .answer {
   font-weight: 700;
 }
-
 .answer-link {
   border: 2px solid #ddd;
   border-radius: 6px;
@@ -152,11 +149,11 @@ img {
   }
 }
 .answer-link:active, .answer-link:focus, .answer-link:hover, .answer-link.is-selected {
-  border-color: #92539f;
+  border-color: #5cb85c;
   color: #333;
 }
 .answer-link.is-selected::before {
-  background: #92539f;
+  background: #5cb85c;
   color: #333;
 }
 .answer-link::before {
@@ -187,22 +184,22 @@ img {
   position: relative;
 }
 .btn:active, .btn:focus, .btn:hover {
-  background: #73427d;
+  background: #DB455D;
   color: #fff;
 }
 .btn--b {
-  background: #de3a95;
+  background: #DB455D;
   line-height: 2.5;
 }
 .btn--b:active, .btn--b:focus, .btn--b:hover {
-  background: #c4217b;
+  background: #DB455D;
   color: #fff;
 }
 .btn[disabled] {
   opacity: 0.4;
 }
 .btn[disabled]:active, .btn[disabled]:focus, .btn[disabled]:hover {
-  background: #92539f;
+  background: #DB455D;
   color: #fff;
 }
 
@@ -222,8 +219,7 @@ img {
 }
 .brand-img {
   display: block;
-  margin: 0 auto;
-  border-radius: 50%;
+  margin: 0 auto;  
 }
 
 .card {
@@ -261,9 +257,9 @@ img {
 .event {
   color: #000;
 }
-a.top-nav {
-  color: #fff;
-  text-decoration: none
+a.top-nav {  
+  text-decoration: none;
+  font-weight: 600;
 }
 
 .help-block.user-bio {
@@ -272,6 +268,10 @@ a.top-nav {
 
 .btn-default {
   background-color:#8C7A7A;
+}
+
+p.form-info {
+  color: #5cb85c;
 }
 
 @-webkit-keyframes fadeIn {

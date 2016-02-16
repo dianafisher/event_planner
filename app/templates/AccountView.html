@@ -7,46 +7,56 @@
         </div>
     </div>
     <form class="form-horizontal">
-        <fieldset>
-            <div class=form-group>
-                <label for="inputName" class="col-lg-2 control-label">Name</label>
+        <p class="form-info">Required fields are followed by <strong><abbr title="required">*</abbr></strong>.</p>            
+        <section>
+            <div class="form-group">
+                <label for="inputName" class="col-lg-2 control-label">Name<strong><abbr title="required">*</abbr></strong></label>
                 <div class="col-lg-10">
                     <input type="text" class="form-control" id="inputName" placeholder="Full Name" maxlength="100" autofocus required>
+                    <p class="help-block"></p>
                 </div>    
             </div>
             <div class="form-group">
-                <label for="inputEmail" class="col-lg-2 control-label">Email</label>
+                <label for="inputEmail" class="col-lg-2 control-label">Email<strong><abbr title="required">*</abbr></strong></label>
                 <div class="col-lg-10">
                     <input type="text" class="form-control" id="inputEmail" placeholder="Email" required>
+                    <p class="help-block"></p>
                 </div>    
             </div>
             <div class="form-group">
-                <label for="inputPassword" class="col-lg-2 control-label">Password</label>
+                <label for="inputPassword" class="col-lg-2 control-label">Password<strong><abbr title="required">*</abbr></strong></label>
                 <div class="col-lg-10">
                     <input type="password" class="form-control" id="inputPassword" placeholder="Password" maxlength="20" required>
+                    <p class="help-block"></p>
                 </div>
             </div>
             <div class="form-group">
-                <label for="repeatPassword" class="col-lg-2 control-label">Repeat Password</label>
+                <label for="repeatPassword" class="col-lg-2 control-label">Repeat Password<strong><abbr title="required">*</abbr></strong></label>
                 <div class="col-lg-10">
                     <input type="password" class="form-control" id="repeatPassword" placeholder="Repeat Password" maxlength="20" required>
+                    <p class="help-block"></p>
                 </div>
-            </div>
-
-            <div class="form-group">
-                <label for="birthday" class="col-lg-2 control-label">Birthday</label>
-                <div class="col-lg-10">
-                    <input type="date" class="form-control" id="birthday">
+            </div>   
+        </section>        
+        <section>
+            <p class="form-info">Biographical information</p>
+                <div class="form-group">
+                    <label for="birthday" class="col-lg-2 control-label">Birthday</label>
+                    <div class="col-lg-10">
+                        <input type="date" class="form-control" id="birthday">
+                    </div>
                 </div>
-            </div>
-
-            
-            <div class="form-group">
-              <div class="col-lg-10 col-lg-offset-2">
-                <button type="reset" class="btn btn-default">Cancel</button>
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <div class="form-group">
+                    <label for="inputEmployer" class="col-lg-2 control-label">Employer</label>
+                    <div class="col-lg-10">
+                        <input type="text" class="form-control" id="inputEmployer" placeholder="Employer" required>
+                    </div>    
+                </div>                                    
+        </section>
+        <div class="form-group">
+              <div class="col-lg-10 col-lg-offset-2">                
+                <button type="submit" class="btn btn-success">Submit</button>
               </div>
-            </div>            
-        </fieldset>
+        </div>   
     </form>
 </div>
