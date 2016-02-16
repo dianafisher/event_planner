@@ -106,6 +106,14 @@ li {
   margin-top: 0;
 }
 
+ul {
+  list-style: none;
+}
+
+time {
+  color: #92539f;
+}
+
 a {
   color: #92539f;
   text-decoration: none;
@@ -253,5 +261,7 @@ img {
 .event {
   color: #000;
 }
-
+a.top-nav {
+  color: #fff;
+}
 

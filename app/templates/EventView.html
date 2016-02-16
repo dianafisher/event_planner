@@ -1,13 +1,12 @@
-<div class="event panel panel-default">
+<div class="event panel panel-primary">
     <div class="panel-heading">
-        <h3 class="panel-title">Event Name</h3>
+        <span class="panel-title"><a class="event-name" href='#'><%= name %></a></span>        
     </div>
-    <div class="panel-body">
-        <h5>Event Type</h5>
-        <h5>Event Host</h5>
-        <h5>Event Start Date and Time</h5>
-        <h5>Event End Date and Time</h5>
-        <h5>Location</h5>
-        <h5>Message to guests</h5>
+    <div class="panel-body">    
+    <div class="event-summary">
+        <time datetime="<%= start_time %>"><%= start_date %> at <%= start_time %></time>
+        
+        <div class="event-type"><%= type %></div>
+        <div class="event-host">Hosted by <%= host %></div>        
     </div>
 </div>

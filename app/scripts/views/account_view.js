@@ -6,9 +6,9 @@
 
 app.AccountView = Backbone.View.extend({
 
-    // Instead of generating a new element, bind to the existing skeleton of
-    // the App already present in the HTML.
-    el: '#eventapp',
+    tagName: 'div',
+
+    className: 'accont-view',
 
     ENTER_KEY: 13,
     ESCAPE_KEY: 27,

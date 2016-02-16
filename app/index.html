@@ -29,28 +29,12 @@
       <div class="header">
         <ul class="nav nav-pills pull-right">          
           <li class="active"><a href="#">Log in</a></li>
-          <li class="active"><a href="#">Sign Up</a></li>
+          <li class="active"><a href="#signup">Sign Up</a></li>
         </ul>
-        <h3 class="text">Event Planner</h3>
+        <h3 class="text"><a class="top-nav" href="#">Event Planner</a></h3>
       </div>
 
-      <a href='index.html' class='brand brand--top'>
-        <img src='images/cute-unicorn-on-a-bicycle-with-a-mane-of-flowers.jpg' alt='Unicorn' class='brand-img img-responsive' />
-      </a>
-
-      <div class="jumbotron">
-        <h1>Event Planner</h1>
-        <p class="lead">Helping you plan your events, or find events planned by others!</p>
-        <p><a class="btn btn-lg btn-success" href="#">Sign me up!</a></p>
-      </div>      
-
-      <section id="eventapp">        
-        
-      </section>
-     
-      <div class="footer">
-        <p>♥ from the Yeoman team</p>
-      </div>
+      <div class="eventapp" id="appView"></div>        
     </div>
     
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
@@ -78,16 +62,17 @@
   
     <!-- Models -->
     <script src="scripts/models/todos.js"></script>
+    <script src="scripts/models/events.js"></script>
  
    <!-- Views -->
-    <script src="scripts/views/todos.js"></script>
-    <script src="scripts/views/stats_view.js"></script>
+    <script src="scripts/views/home_view.js"></script>
+    <script src="scripts/views/events_view.js"></script>
     <script src="scripts/views/account_view.js"></script>
     <script src="scripts/views/event_view.js"></script>
  
    <!-- Collections -->
     <script src="scripts/collections/todos.js"></script>
- 
+    <script src="scripts/collections/events.js"></script>
 
     <!-- build:js scripts/plugins.js -->
     <script src="/bower_components/bootstrap-sass/assets/javascripts/bootstrap/affix.js"></script>

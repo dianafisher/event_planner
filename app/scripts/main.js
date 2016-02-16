@@ -5,9 +5,12 @@
 /*global document*/
 /*global console*/
 /*global alert*/
+/*global prompt*/
+/*global Promise*/
 /*eslint no-undef: 2*/
 /*eslint no-new: 0*/
-/*eslint no-alert: 2*/
+/*eslint no-alert: 0*/
+
 'use strict';
 
 var app = {
@@ -34,7 +37,8 @@ var app = {
 app.Router = Backbone.Router.extend({
 
     routes: {
-        // '*filter': 'setFilter'
+        '': 'index',
+        'signup': 'createAccount'
     },
 
     initialize: function() {
@@ -43,45 +47,84 @@ app.Router = Backbone.Router.extend({
         // $('#eventapp').append(accountView.render().el);
         // new app.StatsView({ collection: app.Todos });
 
-        var eventView = new app.EventView();
-        $('#eventapp').append(eventView.render().el);
+        // var eventView = new app.EventView();
+        // $('#eventapp').append(eventView.render().el);
 
-        var eventView2 = new app.EventView();
-        $('#eventapp').append(eventView2.render().el);
+        // var eventView2 = new app.EventView();
+        // $('#eventapp').append(eventView2.render().el);
+        // var eventsView = new app.EventsView({ collection: app.Events });
+        // $('#eventapp').append(eventsView.render().el);
+
+        // Grab the div for the app
+        this.$app = $('#appView');
+
     },
 
     index: function() {
         console.log('index');
+        var self = this;
+
+        var homeView = new app.HomeView();
+        this.showView(homeView);
+
+    //     app.Events.fetch({
+    //         success: function(data) {
+    //             console.log(data);
+    //             var eventsView = new app.EventsView({ collection: app.Events });
+    //             $('#events').append(eventsView.render().el);
+    //         },
+    //         error: function(model, xhr, options) {
+    //             console.log(xhr.status);
+    //             console.log(xhr.responseText);
+    //         }
+    //     });
     },
 
-    setFilter: function (param) {
-        // Set the current filter to be used
-        console.log('param', param);
-        app.TodoFilter = param || '';
+    showView: function(view) {
+        if (this.currentView) {
+            this.currentView.remove();
+        }
+        this.$app.html(view.render().el);
+        this.currentView = view;
+    },
 
-        // Trigger a collection filter event, causing hiding/unhiding
-        // of the Todo view items
-        app.Todos.trigger('filter');
+    createAccount: function() {
+        console.log('create account..');
+        var accountView = new app.AccountView();
+        this.showView(accountView);
     }
 });
 
+
+
 console.log('\'Allo \'Allo!');
 
-var myFirebaseRef = new Firebase('https://burning-torch-7549.firebaseio.com/');
+var USERS_LOCATION = 'https://SampleChat.firebaseIO-demo.com/users';
 
-$('#testInput').keypress(function (e) {
-  if (e.keyCode === 13) {
-    myFirebaseRef.set({
-      title: 'Hello World!',
-      author: 'Firebase',
-      location: {
-        city: 'San Francisco',
-        state: 'California',
-        zip: 94103
-      }
-    });
+function userExistsCallback(userId, exists) {
+  if (exists) {
+    alert('user ' + userId + ' exists!');
+  } else {
+    alert('user ' + userId + ' does not exist!');
   }
-});
+}
+
+// Tests to see if /users/<userId> has any data.
+function checkIfUserExists(userId) {
+  var usersRef = new Firebase(USERS_LOCATION);
+  usersRef.child(userId).once('value', function(snapshot) {
+    var exists = (snapshot.val() !== null);
+    userExistsCallback(userId, exists);
+  });
+}
+
+function go() {
+    var userId = prompt('Username?', 'Guest');
+    checkIfUserExists(userId);
+}
+
+
+var myFirebaseRef = new Firebase('https://burning-torch-7549.firebaseio.com/users');
 
 // Add a callback to be informed when messages arrive.
 myFirebaseRef.on('child_added', function(snapshot) {
@@ -92,9 +135,19 @@ myFirebaseRef.on('child_added', function(snapshot) {
 
 
 $(document).on('ready', function () {
+    
+    // // Authenticate Firebase
+    // var ref = new Firebase("https://burning-torch-7549.firebaseio.com");
+    // ref.authWithCustomToken("AUTH_TOKEN", function(error, authData) {
+    //   if (error) {
+    //     console.log("Authentication Failed!", error);
+    //   } else {
+    //     console.log("Authenticated successfully with payload:", authData);
+    //   }
+    // });
 
     app.loadTemplates([
-           'TodoView', 'StatsView', 'AccountView', 'EventView'
+           'HomeView', 'EventsView', 'AccountView', 'EventView'
         ],
         function () {
             app.router = new app.Router();

@@ -5,6 +5,7 @@
 'use strict';
 
 app.EventView = Backbone.View.extend({
+
     initialize: function () {
         console.log('event view initialize');
         // this.$account = this.$('#account');
@@ -26,8 +27,9 @@ app.EventView = Backbone.View.extend({
 
     render: function () { 
         // this.$el.html(this.template());       
-        console.log('render EventView');
-        this.$el.html(this.template());
+        console.log(this.model.attributes);
+        console.log(this.model.attributes.name);
+        this.$el.html(this.template(this.model.attributes));
         return this;
     }
 });
