@@ -9,14 +9,14 @@
     <form class="form-horizontal">
         <p class="form-info">Required fields are followed by <strong><abbr title="required">*</abbr></strong>.</p>            
         <section>
-            <div class="form-group" id="account-name">
+            <div class="form-group" id="name-group">
                 <label for="inputName" class="col-lg-2 control-label">Name<strong><abbr title="required">*</abbr></strong></label>
                 <div class="col-lg-10">
                     <input type="text" class="form-control" id="inputName" placeholder="Full Name" maxlength="100" autofocus required autocomplete="name">
                     <p class="help-block"></p>
                 </div>    
             </div>
-            <div class="form-group">
+            <div class="form-group" id="email-group">
                 <label for="inputEmail" class="col-lg-2 control-label">Email<strong><abbr title="required">*</abbr></strong></label>
                 <div class="col-lg-10">
                     <input type="text" class="form-control" id="inputEmail" placeholder="Email" required autocomplete="email">
@@ -26,14 +26,22 @@
             <div class="form-group">
                 <label for="inputPassword" class="col-lg-2 control-label">Password<strong><abbr title="required">*</abbr></strong></label>
                 <div class="col-lg-10">
-                    <input type="password" class="form-control" id="inputPassword" placeholder="Password" maxlength="20" required>
-                    <p class="help-block"></p>
+                    <input type="password" class="form-control" id="inputPassword" placeholder="Password" maxlength="100" required>
+                    <p class="help-block">Password must meet the following criteria:
+                        <ul>
+                            <li id="pwd-length">16-100 characters in length</li>
+                            <li id="pwd-symbol">At least one symbol: !, @, #, $, %, ^, *
+                            <li id="pwd-number">At least one number</li>
+                            <li id="pwd-lower">At least one lowercase letter</li>
+                            <li id="pwd-upper">At least one uppercase letter</li>
+                        </ul>
+                    </p>
                 </div>
             </div>
             <div class="form-group">
                 <label for="repeatPassword" class="col-lg-2 control-label">Repeat Password<strong><abbr title="required">*</abbr></strong></label>
                 <div class="col-lg-10">
-                    <input type="password" class="form-control" id="repeatPassword" placeholder="Repeat Password" maxlength="20" required>
+                    <input type="password" class="form-control" id="repeatPassword" placeholder="Repeat Password" maxlength="100" required>
                     <p class="help-block"></p>
                 </div>
             </div>   
@@ -61,7 +69,7 @@
         </section>
         <div class="form-group">
               <div class="col-lg-10 col-lg-offset-2">                
-                <button type="submit" class="btn btn-success">Submit</button>
+                <button id="submit-btn" type="submit" class="btn btn-success" disabled="true">Submit</button>
               </div>
         </div>   
     </form>
