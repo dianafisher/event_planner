@@ -5,7 +5,8 @@
     "bootstrap-sass": "~3.3.5",
     "backbonefire": "^0.5.1",
     "requirejs": "^2.1.22",
-    "text": "requirejs-text#^2.0.14"
+    "text": "requirejs-text#^2.0.14",
+    "geofire": "^3.2.4"
   },
   "overrides": {
     "bootstrap-sass": {

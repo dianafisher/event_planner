@@ -10,6 +10,16 @@ app.AccountView = Backbone.View.extend({
 
     className: 'accont-view',
 
+    // The DOM events specific to an item.
+    // events: {
+    //     'click .toggle': 'toggleCompleted',
+    //     'dblclick label': 'edit',
+    //     'click .destroy': 'clear',
+    //     'keypress .edit': 'updateOnEnter',
+    //     'keydown .edit': 'revertOnEscape',
+    //     'blur .edit': 'close'
+    // },
+
     ENTER_KEY: 13,
     ESCAPE_KEY: 27,
 
