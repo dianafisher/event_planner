@@ -52,10 +52,15 @@ app.AccountView = Backbone.View.extend({
 
     validateEmail: function(e) {
         var email = this.$('#inputEmail').val().trim();
-        console.log(email);
+        console.log(email);    
+        var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;        
+
         if (email.length == 0) {
             this.$('#email-group').addClass('has-error');
             this.$('#email-help').html('Please enter an email address.');
+        } else if (!re.test(email)) {
+            this.$('#email-group').addClass('has-error');
+            this.$('#email-help').html('Please enter a valid email address.');
         } else {
             this.$('#email-group').removeClass('has-error');
             this.$('#email-help').html('');
