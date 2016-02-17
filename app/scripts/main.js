@@ -125,14 +125,8 @@ function go() {
 }
 
 
-var firebaseRef = new Firebase('https://burning-torch-7549.firebaseio.com');
+app.firebaseRef = new Firebase('https://burning-torch-7549.firebaseio.com');
 
-// Add a callback to be informed when messages arrive.
-firebaseRef.on('child_added', function(snapshot) {
-  // Extract the message data from the snapshot
-    var message = snapshot.val();
-    console.log(message);
-});
 
 $(document).on('ready', function () {
     

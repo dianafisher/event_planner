@@ -27,11 +27,21 @@ app.AccountView = Backbone.View.extend({
         this.repeatPasswordHasErrors = false;
         // test password = Aa!2nnnnnnnnnnnnn
 
+        // Get a database reference to our users.
+        this.usersRef = app.firebaseRef.child('users');
+
+        // Attach an asynchronous callback to read the data at our posts reference
+        this.usersRef.on("value", function(snapshot) {
+            console.log(snapshot.val());
+        }, function (errorObject) {
+            console.log("The read failed: " + errorObject.code);
+        });
     },
 
     render: function () {
         console.log('render AccountView');
         this.$el.html(this.template());
+
         this.$inputPassword = this.$('#inputPassword');
         this.$repeatPassword = this.$('#repeatPassword');
         
@@ -39,9 +49,9 @@ app.AccountView = Backbone.View.extend({
     },
 
     validateName: function(e) {
-        var name = this.$('#inputName').val().trim();
-        console.log(name);
-        if (name.length == 0) {
+        this.username = this.$('#inputName').val().trim();
+        console.log(this.username);
+        if (this.username.length == 0) {
             this.$('#name-group').addClass('has-error');
             this.$('#name-help').html('Please enter a name.');
             this.nameHasErrors = true;
@@ -53,15 +63,15 @@ app.AccountView = Backbone.View.extend({
     },
 
     validateEmail: function(e) {
-        var email = this.$('#inputEmail').val().trim();
-        console.log(email);    
+        this.email = this.$('#inputEmail').val().trim();
+        console.log(this.email);    
         var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;        
 
-        if (email.length == 0) {
+        if (this.email.length == 0) {
             this.$('#email-group').addClass('has-error');
             this.$('#email-help').html('Please enter an email address.');
             this.emailHasErrors = true;
-        } else if (!re.test(email)) {
+        } else if (!re.test(this.email)) {
             this.$('#email-group').addClass('has-error');
             this.$('#email-help').html('Please enter a valid email address.');
             this.emailHasErrors = true;
@@ -73,11 +83,11 @@ app.AccountView = Backbone.View.extend({
     },
 
     validatePassword: function(e) {
-        var password = this.$inputPassword.val().trim();
+        this.password = this.$inputPassword.val().trim();
         var errors = [];
 
         // Check password length
-        if (password.length < 16 || password.length > 100) {
+        if (this.password.length < 16 || this.password.length > 100) {
             errors.push('#pwd-length');
             this.$('#pwd-length').addClass('bg-danger');
         } else {
@@ -85,7 +95,7 @@ app.AccountView = Backbone.View.extend({
             this.$('#pwd-length').addClass('bg-success');
         }
         // Check for required symbol
-        if (!password.match(/[\!\@\#\$\%\^\*]/g)) {
+        if (!this.password.match(/[\!\@\#\$\%\^\*]/g)) {
             errors.push('#pwd-symbol');
             this.$('#pwd-symbol').addClass('bg-danger');
         } else {
@@ -93,7 +103,7 @@ app.AccountView = Backbone.View.extend({
             this.$('#pwd-symbol').addClass('bg-success');
         }
         // Check for required number
-        if (!password.match(/[0-9]/g)) {
+        if (!this.password.match(/[0-9]/g)) {
             errors.push('#pwd-number');
             this.$('#pwd-number').addClass('bg-danger');
         } else {
@@ -101,7 +111,7 @@ app.AccountView = Backbone.View.extend({
             this.$('#pwd-number').addClass('bg-success');
         }
         // Check for lowercase letter
-        if (!password.match(/[a-z]/g)) {
+        if (!this.password.match(/[a-z]/g)) {
             errors.push('#pwd-lower');
             this.$('#pwd-lower').addClass('bg-danger');
         } else {
@@ -109,7 +119,7 @@ app.AccountView = Backbone.View.extend({
             this.$('#pwd-lower').addClass('bg-success');
         }
         // Check for uppercase letter
-        if (!password.match(/[A-Z]/g)) {
+        if (!this.password.match(/[A-Z]/g)) {
             errors.push('#pwd-upper');
             this.$('#pwd-upper').addClass('bg-danger');
         } else {
@@ -127,7 +137,7 @@ app.AccountView = Backbone.View.extend({
 
         var repeatedPassword = this.$repeatPassword.val().trim();
 
-        if (repeatedPassword != password) {
+        if (repeatedPassword !=this.password) {
             this.$('#repeat-password-group').addClass('has-error');
             this.$('#repeat-password-help').html("Passwords do not match.");
         } else {
@@ -159,8 +169,47 @@ app.AccountView = Backbone.View.extend({
         this.validatePassword(e);
         this.validateRepeatedPassword(e);
 
+        // Get the birthday, if entered.
+        var birthday = this.$('#birthday').val();
+        console.log(birthday);
+
+        var employer = this.$('#inputEmployer').val().trim();
+        var jobTitle = this.$('#inputJobTitle').val().trim();
+        var name = this.username;
+        var email = this.email;
+
         if (!this.repeatPasswordHasErrors && !this.passwordHasErrors && !this.emailHasErrors && !this.nameHasErrors) {
             console.log('all fields valid.');
+
+            // Create the user in Firebase using just the email and password.
+            app.firebaseRef.createUser({
+                email: this.email,
+                password: this.password
+            }, function(error, userData){
+                if (error) {
+                    console.log('Error creating user:', error);
+                } else {
+                    console.log('Successfully created user account with uid:', userData.uid);
+                    // Now that we have the uid for the user, populate the users table with it.
+                    var usersRef = app.firebaseRef.child('users');
+                    var userAccountRef = usersRef.child(userData.uid);
+                    userAccountRef.set({
+                        name: name,
+                        email: email,
+                        birthday: birthday,
+                        employer: employer,
+                        jobTitle: jobTitle
+                        }, function(error2) {
+                            if (error2) {
+                                console.log('Could not save data ' + error2);
+                            } else {
+                                console.log('Successfully saved.');
+                            }
+                        }
+                    );
+                }
+            });            
+
         } else {
             console.log('errors!');
         }
