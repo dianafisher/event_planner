@@ -13,27 +13,23 @@ app.AccountView = Backbone.View.extend({
     // The DOM events specific to an item.
     events: {
         'keyup #inputPassword': 'validatePassword',
+        'keyup #repeatPassword': 'validateRepeatedPassword',
+        'blur #inputName': 'validateName',
+        'blur #inputEmail': 'validateEmail',
+        'submit': 'createUser'
     },
 
     ENTER_KEY: 13,
     ESCAPE_KEY: 27,
 
-    // At initialization we bind to the relevant events on the `this.collection`
-    // collection, when items are added or changed. Kick things off by
-    // loading any preexisting todos that might be saved in *localStorage*.
     initialize: function () {
         console.log('account view initialize');
 
-        // this.$account = this.$('#account');
+        // test password = Aa!2nnnnnnnnnnnnn
 
-        // this.allCheckbox = this.$('#toggle-all')[0];
-        // this.$input = this.$('#new-todo');
-        // this.$footer = this.$('#footer');
-        // this.$main = this.$('#main');
-        // this.$todoList = this.$('#todo-list');
     },
 
-    render: function () {         
+    render: function () {
         console.log('render AccountView');
         this.$el.html(this.template());
         this.$inputPassword = this.$('#inputPassword');
@@ -42,59 +38,106 @@ app.AccountView = Backbone.View.extend({
         return this;
     },
 
+    validateName: function(e) {
+        var name = this.$('#inputName').val().trim();
+        console.log(name);
+        if (name.length == 0) {
+            this.$('#name-group').addClass('has-error');
+            this.$('#name-help').html('Please enter a name.');
+        } else {
+            this.$('#name-group').removeClass('has-error');
+            this.$('#name-help').html('');
+        }
+    },
+
+    validateEmail: function(e) {
+        var email = this.$('#inputEmail').val().trim();
+        console.log(email);
+        if (email.length == 0) {
+            this.$('#email-group').addClass('has-error');
+            this.$('#email-help').html('Please enter an email address.');
+        } else {
+            this.$('#email-group').removeClass('has-error');
+            this.$('#email-help').html('');
+        }
+    },
+
     validatePassword: function(e) {
         var password = this.$inputPassword.val().trim();
-        console.log(password);
-        this.validateLength(password);
-        this.validateSymbol(password);
-        this.validateNumber(password);
-        this.validateLower(password);
-        this.validateUpper(password);
-    },
+        var errors = [];
 
-    validateLength: function(password) {
-        console.log(password.length);
-        if (password.length >= 16) {
+        // Check password length
+        if (password.length < 16 || password.length > 100) {
+            errors.push('#pwd-length');
+            this.$('#pwd-length').addClass('bg-danger');
+        } else {
             this.$('#pwd-length').removeClass('bg-danger');
             this.$('#pwd-length').addClass('bg-success');
-        } else {
-           this.$('#pwd-length').addClass('bg-danger');
         }
-    },
-
-    validateSymbol: function(password) {
-        if (password.match(/[\!\@\#\$\%\^\*]/g)) {
-           this.$('#pwd-symbol').removeClass('bg-danger');
+        // Check for required symbol
+        if (!password.match(/[\!\@\#\$\%\^\*]/g)) {
+            errors.push('#pwd-symbol');
+            this.$('#pwd-symbol').addClass('bg-danger');
+        } else {
+            this.$('#pwd-symbol').removeClass('bg-danger');
             this.$('#pwd-symbol').addClass('bg-success');
-        } else {
-           this.$('#pwd-symbol').addClass('bg-danger');
         }
-    },
-
-    validateNumber: function(password) {
-        if (password.match(/[0-9]/g)) {
-           this.$('#pwd-number').removeClass('bg-danger');
+        // Check for required number
+        if (!password.match(/[0-9]/g)) {
+            errors.push('#pwd-number');
+            this.$('#pwd-number').addClass('bg-danger');
+        } else {
+            this.$('#pwd-number').removeClass('bg-danger');
             this.$('#pwd-number').addClass('bg-success');
-        } else {
-           this.$('#pwd-number').addClass('bg-danger');
         }
-    },
-
-    validateLower: function(password) {
-       if (password.match(/[a-z]/g)) {
-           this.$('#pwd-lower').removeClass('bg-danger');
+        // Check for lowercase letter
+        if (!password.match(/[a-z]/g)) {
+            errors.push('#pwd-lower');
+            this.$('#pwd-lower').addClass('bg-danger');
+        } else {
+            this.$('#pwd-lower').removeClass('bg-danger');
             this.$('#pwd-lower').addClass('bg-success');
+        }
+        // Check for uppercase letter
+        if (!password.match(/[A-Z]/g)) {
+            errors.push('#pwd-upper');
+            this.$('#pwd-upper').addClass('bg-danger');
         } else {
-           this.$('#pwd-lower').addClass('bg-danger');
+            this.$('#pwd-upper').removeClass('bg-danger');
+            this.$('#pwd-upper').addClass('bg-success');
+        }
+
+        if (errors.length > 0) {
+            this.$('#password-group').addClass('has-error');
+        } else {
+            this.$('#password-group').removeClass('has-error');
+        }
+
+        var repeatedPassword = this.$repeatPassword.val().trim();
+
+        if (repeatedPassword != password) {
+            this.$('#repeat-password-group').addClass('has-error');
+            this.$('#repeat-password-help').html("Passwords do not match.");
+        } else {
+            this.$('#repeat-password-group').removeClass('has-error');
+            this.$('#repeat-password-help').html("");
         }
     },
 
-    validateUpper: function(password) {
-       if (password.match(/[A-Z]/g)) {
-           this.$('#pwd-upper').removeClass('bg-danger');
-            this.$('#pwd-upper').addClass('bg-success');
+    validateRepeatedPassword: function(e) {
+        var password = this.$inputPassword.val().trim();
+        var repeatedPassword = this.$repeatPassword.val().trim();
+
+        if (repeatedPassword != password) {
+            this.$('#repeat-password-group').addClass('has-error');
+            this.$('#repeat-password-help').html("Passwords do not match.");
         } else {
-           this.$('#pwd-upper').addClass('bg-danger');
+            this.$('#repeat-password-group').removeClass('has-error');
+            this.$('#repeat-password-help').html("");
         }
+    },
+   
+    createUser: function(e) {
+        console.log('createUser!');
     }
 });

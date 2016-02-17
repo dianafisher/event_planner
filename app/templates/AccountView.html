@@ -13,17 +13,17 @@
                 <label for="inputName" class="col-lg-2 control-label">Name<strong><abbr title="required">*</abbr></strong></label>
                 <div class="col-lg-10">
                     <input type="text" class="form-control" id="inputName" placeholder="Full Name" maxlength="100" autofocus required autocomplete="name">
-                    <p class="help-block"></p>
+                    <p class="help-block" id="name-help"></p>
                 </div>    
             </div>
             <div class="form-group" id="email-group">
                 <label for="inputEmail" class="col-lg-2 control-label">Email<strong><abbr title="required">*</abbr></strong></label>
                 <div class="col-lg-10">
                     <input type="text" class="form-control" id="inputEmail" placeholder="Email" required autocomplete="email">
-                    <p class="help-block"></p>
+                    <p class="help-block" id="email-help"></p>
                 </div>    
             </div>
-            <div class="form-group">
+            <div class="form-group" id="password-group">
                 <label for="inputPassword" class="col-lg-2 control-label">Password<strong><abbr title="required">*</abbr></strong></label>
                 <div class="col-lg-10">
                     <input type="password" class="form-control" id="inputPassword" placeholder="Password" maxlength="100" required>
@@ -38,11 +38,11 @@
                     </p>
                 </div>
             </div>
-            <div class="form-group">
+            <div class="form-group" id="repeat-password-group">
                 <label for="repeatPassword" class="col-lg-2 control-label">Repeat Password<strong><abbr title="required">*</abbr></strong></label>
                 <div class="col-lg-10">
                     <input type="password" class="form-control" id="repeatPassword" placeholder="Repeat Password" maxlength="100" required>
-                    <p class="help-block"></p>
+                    <p class="help-block" id="repeat-password-help"></p>
                 </div>
             </div>   
         </section>        
@@ -57,19 +57,19 @@
                 <div class="form-group">
                     <label for="inputEmployer" class="col-lg-2 control-label">Employer</label>
                     <div class="col-lg-10">
-                        <input type="text" class="form-control" id="inputEmployer" placeholder="Employer" required>
+                        <input type="text" class="form-control" id="inputEmployer" placeholder="Employer">
                     </div>    
                 </div>
                 <div class="form-group">
                     <label for="inputJobTitle" class="col-lg-2 control-label">Job Title</label>
                     <div class="col-lg-10">
-                        <input type="text" class="form-control" id="inputJobTitle" placeholder="Job Title" required>
+                        <input type="text" class="form-control" id="inputJobTitle" placeholder="Job Title">
                     </div>    
                 </div>                                    
         </section>
         <div class="form-group">
               <div class="col-lg-10 col-lg-offset-2">                
-                <button id="submit-btn" type="submit" class="btn btn-success" disabled="true">Submit</button>
+                <button id="submit-btn" type="submit" class="btn btn-success">Submit</button>
               </div>
         </div>   
     </form>
