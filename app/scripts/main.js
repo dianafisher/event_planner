@@ -39,7 +39,8 @@ app.Router = Backbone.Router.extend({
 
     routes: {
         '': 'index',
-        'signup': 'createAccount'
+        'signup': 'createAccount',
+        'login': 'login'
     },
 
     initialize: function() {
@@ -93,6 +94,11 @@ app.Router = Backbone.Router.extend({
         console.log('create account..');
         var accountView = new app.AccountView();
         this.showView(accountView);
+    },
+
+    login: function() {
+        var loginView = new app.LoginView();
+        this.showView(loginView);
     }
 });
 
@@ -141,7 +147,7 @@ $(document).on('ready', function () {
     // });
 
     app.loadTemplates([
-           'HomeView', 'EventsView', 'AccountView', 'EventView'
+           'HomeView', 'EventsView', 'AccountView', 'EventView', 'LoginView'
         ],
         function () {
             app.router = new app.Router();

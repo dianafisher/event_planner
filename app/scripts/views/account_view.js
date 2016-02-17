@@ -30,12 +30,12 @@ app.AccountView = Backbone.View.extend({
         // Get a database reference to our users.
         this.usersRef = app.firebaseRef.child('users');
 
-        // Attach an asynchronous callback to read the data at our posts reference
-        this.usersRef.on("value", function(snapshot) {
-            console.log(snapshot.val());
-        }, function (errorObject) {
-            console.log("The read failed: " + errorObject.code);
-        });
+        // // Attach an asynchronous callback to read the data at our posts reference
+        // this.usersRef.on("value", function(snapshot) {
+        //     console.log(snapshot.val());
+        // }, function (errorObject) {
+        //     console.log("The read failed: " + errorObject.code);
+        // });
     },
 
     render: function () {
