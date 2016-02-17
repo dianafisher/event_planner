@@ -46,6 +46,6 @@ app.LoginView = Backbone.View.extend({
     },
 
     redirect: function() {
-        app.router.navigate('#', {trigger: true});
+        app.router.navigate('#events', {trigger: true});
     }
 });

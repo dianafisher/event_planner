@@ -8,7 +8,6 @@
 /*global alert*/
 /*global prompt*/
 /*global Promise*/
-/*eslint no-undef: 2*/
 /*eslint no-new: 0*/
 /*eslint no-alert: 0*/
 
@@ -40,7 +39,9 @@ app.Router = Backbone.Router.extend({
     routes: {
         '': 'index',
         'signup': 'createAccount',
-        'login': 'login'
+        'login': 'login',
+        'events': 'showEvents',
+        'events/new': 'createEvent'
     },
 
     initialize: function() {
@@ -68,18 +69,6 @@ app.Router = Backbone.Router.extend({
 
         var homeView = new app.HomeView();
         this.showView(homeView);
-
-    //     app.Events.fetch({
-    //         success: function(data) {
-    //             console.log(data);
-    //             var eventsView = new app.EventsView({ collection: app.Events });
-    //             $('#events').append(eventsView.render().el);
-    //         },
-    //         error: function(model, xhr, options) {
-    //             console.log(xhr.status);
-    //             console.log(xhr.responseText);
-    //         }
-    //     });
     },
 
     showView: function(view) {
@@ -99,6 +88,27 @@ app.Router = Backbone.Router.extend({
     login: function() {
         var loginView = new app.LoginView();
         this.showView(loginView);
+    },
+
+    createEvent: function() {
+        var createEventView = new app.CreateEventView();
+        this.showView(createEventView);
+    },
+
+    showEvents: function() {
+        console.log('showEvents');
+        var self = this;
+        app.Events.fetch({
+            success: function(data) {
+                console.log(data);
+                var eventsView = new app.EventsView({ collection: app.Events });
+                self.showView(eventsView);
+            },
+            error: function(model, xhr, options) {
+                console.log(xhr.status);
+                console.log(xhr.responseText);
+            }
+        });
     }
 });
 
@@ -147,7 +157,7 @@ $(document).on('ready', function () {
     // });
 
     app.loadTemplates([
-           'HomeView', 'EventsView', 'AccountView', 'EventView', 'LoginView'
+           'HomeView', 'EventsView', 'AccountView', 'EventView', 'LoginView', 'CreateEventView'
         ],
         function () {
             app.router = new app.Router();
