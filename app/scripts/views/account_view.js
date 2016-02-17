@@ -19,12 +19,12 @@ app.AccountView = Backbone.View.extend({
         'submit': 'createUser'
     },
 
-    ENTER_KEY: 13,
-    ESCAPE_KEY: 27,
-
     initialize: function () {
         console.log('account view initialize');
-
+        this.nameHasErrors = false;
+        this.emailHasErrors = false;
+        this.passwordHasErrors = false;
+        this.repeatPasswordHasErrors = false;
         // test password = Aa!2nnnnnnnnnnnnn
 
     },
@@ -44,9 +44,11 @@ app.AccountView = Backbone.View.extend({
         if (name.length == 0) {
             this.$('#name-group').addClass('has-error');
             this.$('#name-help').html('Please enter a name.');
+            this.nameHasErrors = true;
         } else {
             this.$('#name-group').removeClass('has-error');
             this.$('#name-help').html('');
+            this.nameHasErrors = false;
         }
     },
 
@@ -58,12 +60,15 @@ app.AccountView = Backbone.View.extend({
         if (email.length == 0) {
             this.$('#email-group').addClass('has-error');
             this.$('#email-help').html('Please enter an email address.');
+            this.emailHasErrors = true;
         } else if (!re.test(email)) {
             this.$('#email-group').addClass('has-error');
             this.$('#email-help').html('Please enter a valid email address.');
+            this.emailHasErrors = true;
         } else {
             this.$('#email-group').removeClass('has-error');
             this.$('#email-help').html('');
+            this.emailHasErrors = false;
         }
     },
 
@@ -114,8 +119,10 @@ app.AccountView = Backbone.View.extend({
 
         if (errors.length > 0) {
             this.$('#password-group').addClass('has-error');
+            this.passwordHasErrors = true;
         } else {
             this.$('#password-group').removeClass('has-error');
+            this.passwordHasErrors = false;
         }
 
         var repeatedPassword = this.$repeatPassword.val().trim();
@@ -136,13 +143,26 @@ app.AccountView = Backbone.View.extend({
         if (repeatedPassword != password) {
             this.$('#repeat-password-group').addClass('has-error');
             this.$('#repeat-password-help').html("Passwords do not match.");
+            this.repeatPasswordHasErrors = true;
         } else {
             this.$('#repeat-password-group').removeClass('has-error');
             this.$('#repeat-password-help').html("");
+            this.repeatPasswordHasErrors = false;
         }
     },
    
     createUser: function(e) {
         console.log('createUser!');
+        // validate all required fields (again)
+        this.validateName(e);
+        this.validateEmail(e);
+        this.validatePassword(e);
+        this.validateRepeatedPassword(e);
+
+        if (!this.repeatPasswordHasErrors && !this.passwordHasErrors && !this.emailHasErrors && !this.nameHasErrors) {
+            console.log('all fields valid.');
+        } else {
+            console.log('errors!');
+        }
     }
 });
