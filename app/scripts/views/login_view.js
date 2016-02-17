@@ -10,6 +10,10 @@ app.LoginView = Backbone.View.extend({
 
     className: 'login-view',
 
+    events: {
+        'submit': 'loginUser'
+    },
+
     initialize: function () {
         console.log('login view initialize');        
     },
@@ -19,5 +23,29 @@ app.LoginView = Backbone.View.extend({
         this.$el.html(this.template());       
         
         return this;
+    },
+
+    loginUser: function(e) {
+        var email = this.$('#inputEmail').val().trim();
+        var password = this.$('#inputPassword').val().trim();
+        var self = this;
+
+        app.firebaseRef.authWithPassword({
+            email: email,
+            password: password
+        }, function(error, authData) {
+            if (error) {
+                console.log('login failed!', error);
+            } else {
+                console.log('Authenticated successfully with payload:', authData);
+                self.redirect();
+            } 
+        }, {
+            remember: 'sessionOnly'
+        });
+    },
+
+    redirect: function() {
+        app.router.navigate('#', {trigger: true});
     }
 });
