@@ -72,14 +72,15 @@ app.CreateEventView = Backbone.View.extend({
     validateStartTime: function(e) {
         this.startTime = this.$('#startTime').val();
         console.log(this.startTime);
+        
         if (this.startTime.length == 0) {
             this.$('#start-date-group').addClass('has-error');
             this.$('#start-date-help').html('Please enter a start time for the event.');
-            this.startDateErrors = true;
+            this.startTimeErrors = true;
         } else {
             this.$('#start-date-group').removeClass('has-error');
             this.$('#start-date-help').html('');
-            this.startDateErrors = false;
+            this.startTimeErrors = false;
         }
     },    
 
@@ -104,7 +105,7 @@ app.CreateEventView = Backbone.View.extend({
                 this.$('#end-date-group').addClass('has-error');
                 this.$('#end-date-help').html('End date must be after start date.');
                 this.endDateErrors = true;
-            } else {            
+            } else {
                 this.$('#end-date-group').removeClass('has-error');
                 this.$('#end-date-help').html('');
                 this.endtDateErrors = false;
@@ -115,14 +116,43 @@ app.CreateEventView = Backbone.View.extend({
     validateEndTime: function(e) {
         this.endTime = this.$('#endTime').val();
         console.log(this.endTime);
+
         if (this.endTime.length == 0) {
             this.$('#end-date-group').addClass('has-error');
             this.$('#end-date-help').html('Please enter a end time for the event.');
-            this.endDateErrors = true;
+            this.endTimeErrors = true;
         } else {
-            this.$('#end-date-group').removeClass('has-error');
-            this.$('#end-date-help').html('');
-            this.endDateErrors = false;
+            // if the event starts and ends on the same day, check that the end time is after the start time
+            var startDate = new Date(this.startDate);
+            var endDate = new Date(this.endDate);
+
+            var time_start = this.startTime.match(/(\d+)(?::(\d\d))?\s*(p?)/i);
+            var hours = parseInt(time_start[1], 10);
+            var minutes = parseInt(time_start[2], 10);
+            startDate.setHours(hours);
+            startDate.setMinutes(minutes);
+        
+            var time_end = this.endTime.match(/(\d+)(?::(\d\d))?\s*(p?)/i);
+
+            var h = parseInt(time_end[1], 10);
+            var m = parseInt(time_end[2], 10);           
+
+            endDate.setHours(h);
+            endDate.setMinutes(m);
+
+            console.log('start date', startDate);
+            console.log('end date', endDate);        
+
+            if (endDate.getTime() <= startDate.getTime()) {
+                this.$('#end-date-group').addClass('has-error');
+                this.$('#end-date-help').html('End time must be after start time.');
+                this.endTimeErrors = true;
+            } 
+            else {
+                this.$('#end-date-group').removeClass('has-error');
+                this.$('#end-date-help').html('');
+                this.endTimeErrors = false;    
+            }            
         }
     },
 
@@ -177,15 +207,15 @@ app.CreateEventView = Backbone.View.extend({
         if (this.eventGuests.length == 0) {
             this.$('#guests-group').addClass('has-error');
             this.$('#guests-help').html('Please enter an email address for each guest.');
-            this.emailHasErrors = true;
+            this.guestsHasErrors = true;
         } else if (!re.test(this.eventGuests)) {
             this.$('#guests-group').addClass('has-error');
             this.$('#guests-help').html('Please enter a valid email address.');
-            this.emailHasErrors = true;
+            this.guestsHasErrors = true;
         } else {
             this.$('#guests-group').removeClass('has-error');
             this.$('#guests-help').html('');
-            this.emailHasErrors = false;
+            this.guestsHasErrors = false;
         }
     },
 
