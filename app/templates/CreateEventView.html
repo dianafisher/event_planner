@@ -16,27 +16,29 @@
                     <p class="help-block" id="name-help"></p>
                 </div>    
             </div>
-            <div class="form-group">
+            <div class="form-group" id="start-date-group">
                 <label for="startDate" class="col-lg-2 control-label">Start Date<strong><abbr title="required">*</abbr></strong></label>
                 <div class="col-lg-10">
                     <div class="input-group">                                  
-                        <input type="date" class="form-control" id="startDate">                    
+                        <input type="date" class="form-control" id="startDate" required>                    
                         <span class="input-group-addon">at</span>
-                        <input type="time" class="form-control" id="startTime">
+                        <input type="time" class="form-control" id="startTime" required>
                     </div>
+                    <p class="help-block" id="start-date-help"></p>
                 </div>
             </div>
-            <div class="form-group">
+            <div class="form-group" id="end-date-group">
                 <label class="col-lg-2 control-label">End Date<strong><abbr title="required">*</abbr></strong></label>
                 <div class="col-lg-10">
                     <div class="input-group">                   
-                        <input type="date" class="form-control" id="endDate">                
+                        <input type="date" class="form-control" id="endDate" required>                
                         <span class="input-group-addon">at</span>                
-                        <input type="time" class="form-control" id="endTime">
-                    </div>                
+                        <input type="time" class="form-control" id="endTime" required>
+                    </div>   
+                    <p class="help-block" id="end-date-help"></p>             
                 </div>
             </div>          
-            <div class="form-group" id="type-group">
+            <div class="form-group" id="location-group">
                 <label for="inputLocation" class="col-lg-2 control-label">Where<abbr title="required">*</abbr></strong></label>
                 <div class="col-lg-10">
                     <input type="text" class="form-control" id="inputLocation" placeholder="Event location" required>
@@ -46,7 +48,7 @@
             <div class="form-group" id="type-group">
                 <label for="inputType" class="col-lg-2 control-label">Type<abbr title="required">*</abbr></strong></label>
                 <div class="col-lg-10">
-                    <input class="form-control" list="types" name="event_types" id="inputType" placeholder="Event Type">
+                    <input class="form-control" list="types" name="event_types" id="inputType" placeholder="Event Type" required>
                     <datalist id="types">
                         <option value="Birthday Party">
                         <option value="Wedding">
@@ -61,7 +63,7 @@
             <div class="form-group" id="host-group">
                 <label for="inputHost" class="col-lg-2 control-label">Hosted by<strong><abbr title="required">*</abbr></strong></label>
                 <div class="col-lg-10">
-                    <input type="text" class="form-control" id="inputHost" placeholder="Event host">
+                    <input type="text" class="form-control" id="inputHost" placeholder="Event host" required>
                     <p class="help-block" id="host-help"></p>
                 </div>    
             </div>
@@ -69,10 +71,24 @@
                 <label for="inputGuests" class="col-lg-2 control-label">Guest List<strong><abbr title="required">*</abbr></strong></label>
                 <div class="col-lg-10">
                     <div class="input-group">
-                        <input type="text" class="form-control" id="inputGuests" placeholder="Guest email address">
+                        <input type="text" class="form-control" id="inputGuests" placeholder="Guest email address" required>
                         <span class="input-group-btn">
                             <button class="btn btn-success" type="button">Add</button>
-                        </span>
+                        </span>                        
+                    </div>
+                    <p class="help-block" id="guests-help"></p>
+                </div>
+                <div class="row">
+                    <div class="col-lg-2"></div>
+                    <div class="col-lg-10">
+                        <ul id="guest_list">
+                            <li class="guest-item">
+                                <h5>Kylo Ren<span role="button" class="remove-guest" title="Remove this guest">x</span></h5>
+                            </li>
+                            <li class="guest-item">
+                                <h5>Darth Vader <span role="button" class="remove-guest" title="Remove this guest">x</span></h5>
+                            </li>                            
+                        </ul>
                     </div>
                 </div>
             </div>                  
