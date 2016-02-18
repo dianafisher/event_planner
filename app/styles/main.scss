@@ -170,18 +170,6 @@ img {
   width: 20px;
 }
 
-.btn {  
-  border-bottom: 4px solid rgba(0, 0, 0, 0.1);
-  border-radius: 40px;
-  border: 0;  
-  cursor: pointer;
-  display: inline-block;
-  font-weight: bold;
-  line-height: 3;
-  overflow: hidden;
-  padding: 0 2.5em;
-  position: relative;
-}
 .btn:active, .btn:focus, .btn:hover {
   background: #DB455D;
   color: #fff;

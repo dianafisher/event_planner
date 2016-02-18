@@ -7,5 +7,89 @@
         </div>
     </div>
     <form class="form-horizontal">
+        <p class="form-info">Required fields are followed by <strong><abbr title="required">*</abbr></strong>.</p>            
+        <section>            
+            <div class="form-group" id="name-group">
+                <label for="inputName" class="col-lg-2 control-label">Event Name<strong><abbr title="required">*</abbr></strong></label>
+                <div class="col-lg-10">
+                    <input type="text" class="form-control" id="inputName" placeholder="Event name" maxlength="100" autofocus required>
+                    <p class="help-block" id="name-help"></p>
+                </div>    
+            </div>
+            <div class="form-group">
+                <label for="startDate" class="col-lg-2 control-label">Start Date<strong><abbr title="required">*</abbr></strong></label>
+                <div class="col-lg-10">
+                    <div class="input-group">                                  
+                        <input type="date" class="form-control" id="startDate">                    
+                        <span class="input-group-addon">at</span>
+                        <input type="time" class="form-control" id="startTime">
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-lg-2 control-label">End Date<strong><abbr title="required">*</abbr></strong></label>
+                <div class="col-lg-10">
+                    <div class="input-group">                   
+                        <input type="date" class="form-control" id="endDate">                
+                        <span class="input-group-addon">at</span>                
+                        <input type="time" class="form-control" id="endTime">
+                    </div>                
+                </div>
+            </div>          
+            <div class="form-group" id="type-group">
+                <label for="inputLocation" class="col-lg-2 control-label">Where<abbr title="required">*</abbr></strong></label>
+                <div class="col-lg-10">
+                    <input type="text" class="form-control" id="inputLocation" placeholder="Event location" required>
+                    <p class="help-block" id="location-help"></p>
+                </div>    
+            </div>
+            <div class="form-group" id="type-group">
+                <label for="inputType" class="col-lg-2 control-label">Type<abbr title="required">*</abbr></strong></label>
+                <div class="col-lg-10">
+                    <input class="form-control" list="types" name="event_types" id="inputType" placeholder="Event Type">
+                    <datalist id="types">
+                        <option value="Birthday Party">
+                        <option value="Wedding">
+                        <option value="Graduation">
+                        <option value="Anniversary">
+                        <option value="Conference Talk">
+                        <option value="Sporting Event">
+                    </datalist>                    
+                    <p class="help-block" id="type-help"></p>
+                </div>    
+            </div>
+            <div class="form-group" id="host-group">
+                <label for="inputHost" class="col-lg-2 control-label">Hosted by<strong><abbr title="required">*</abbr></strong></label>
+                <div class="col-lg-10">
+                    <input type="text" class="form-control" id="inputHost" placeholder="Event host">
+                    <p class="help-block" id="host-help"></p>
+                </div>    
+            </div>
+            <div class="form-group" id="guests-group">
+                <label for="inputGuests" class="col-lg-2 control-label">Guest List<strong><abbr title="required">*</abbr></strong></label>
+                <div class="col-lg-10">
+                    <div class="input-group">
+                        <input type="text" class="form-control" id="inputGuests" placeholder="Guest email address">
+                        <span class="input-group-btn">
+                            <button class="btn btn-success" type="button">Add</button>
+                        </span>
+                    </div>
+                </div>
+            </div>                  
+            <div class="form-group" id="message-group">
+                <label for="inputMessage" class="col-lg-2 control-label">Message to Guests</label>
+                <div class="col-lg-10">
+                    <textarea class="form-control" rows="3" id="inputMessage"></textarea>                    
+                    <p class="help-block" id="message-help"></p>
+                </div>    
+            </div>
+        </section>                
+        <div class="form-group">
+              <div class="col-lg-10 col-lg-offset-2">                
+                <button id="submit-btn" type="submit" class="btn btn-success">Create Event!</button>
+              </div>
+        </div>   
+
+
     </form>
 </div>
