@@ -1,12 +1,14 @@
-<div class="event panel panel-primary">
-    <div class="panel-heading">
-        <span class="panel-title"><a class="event-name" href='#'><%= name %></a></span>        
-    </div>
-    <div class="panel-body">    
-    <div class="event-summary">
-        <time datetime="<%= start_time %>"><%= start_date %> at <%= start_time %></time>
-        
-        <div class="event-type"><%= type %></div>
-        <div class="event-host">Hosted by <%= host %></div>        
-    </div>
+<div class="col-md-6">    
+    <div class="event panel panel-success">
+        <div class="panel-heading">
+            <span class="panel-title"><%= name %><button id="details" class="btn btn-xs btn-success btn-outline pull-right"><a id="log-in" href="#events/<%= id %>">Details</a></button></span>        
+        </div>
+        <div class="panel-body">    
+            <div class="event-summary">
+                <time datetime="<%= startDate %>"><%= dateStr %> </time>
+                <time datetime="<%= startTime %>" class="pull-right"><%= timeStr %></time>            
+                <div class="event-type"><i class="panel-title-icon fa <%= event_icon %> pull-right"></i><%= type %></div>
+                <div class="event-location"><%= location %>            
+            </div>
+    </div>    
 </div>

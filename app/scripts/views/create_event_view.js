@@ -96,10 +96,10 @@ app.CreateEventView = Backbone.View.extend({
             // Check that end date is not before start date.
             var start = new Date(this.startDate);
             var end = new Date(this.endDate);
-            console.log('start', start);
-            console.log('start', start.getTime());
-            console.log('end', end);
-            console.log('end', end.getTime());
+            // console.log('start', start);
+            // console.log('start', start.getTime());
+            // console.log('end', end);
+            // console.log('end', end.getTime());
 
             if (end.getTime() < start.getTime()) {
                 this.$('#end-date-group').addClass('has-error');
@@ -131,17 +131,17 @@ app.CreateEventView = Backbone.View.extend({
             var minutes = parseInt(time_start[2], 10);
             startDate.setHours(hours);
             startDate.setMinutes(minutes);
-        
+    
             var time_end = this.endTime.match(/(\d+)(?::(\d\d))?\s*(p?)/i);
 
             var h = parseInt(time_end[1], 10);
-            var m = parseInt(time_end[2], 10);           
+            var m = parseInt(time_end[2], 10);
 
             endDate.setHours(h);
             endDate.setMinutes(m);
 
             console.log('start date', startDate);
-            console.log('end date', endDate);        
+            console.log('end date', endDate);
 
             if (endDate.getTime() <= startDate.getTime()) {
                 this.$('#end-date-group').addClass('has-error');
@@ -151,8 +151,8 @@ app.CreateEventView = Backbone.View.extend({
             else {
                 this.$('#end-date-group').removeClass('has-error');
                 this.$('#end-date-help').html('');
-                this.endTimeErrors = false;    
-            }            
+                this.endTimeErrors = false;
+            }
         }
     },
 
@@ -221,6 +221,31 @@ app.CreateEventView = Backbone.View.extend({
 
      createEvent: function(e) {
         console.log('create event');
+        this.validateName();
+        this.validateStartDate();
+        this.validateStartTime();
+        this.validateEndDate();
+        this.validateEndTime();
+        this.validateLocation();
+        this.validateType();
+        this.validateHost();
+        this.validateGuests();
+
+        var message = this.$('#inputMessage').val().trim();
+
+        var attributes = {
+            name: this.eventName,
+            startDate: this.startDate,
+            startTime: this.startTime,
+            endDate: this.endDate,
+            endTime: this.endTime,
+            location: this.eventLocation,
+            type: this.eventType,
+            host: this.eventHost,
+            guests: this.eventGuests,
+            message: message
+        };
+        app.Events.create(attributes);
     }
 
 

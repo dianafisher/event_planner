@@ -4,15 +4,15 @@
 
 'use strict';
 
-app.EventView = Backbone.View.extend({
+app.EventDetailsView = Backbone.View.extend({
 
     initialize: function () {
-        console.log('event view initialize');
+        console.log('event details view initialize');
     },
 
-    // events: {
-    //     'click #details': 'showDetails'
-    // },
+    events: {
+        'click #details': 'showDetails'
+    },
 
     iconForType: function(type) {
         if (type === 'Birthday Party') {

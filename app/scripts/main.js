@@ -41,6 +41,7 @@ app.Router = Backbone.Router.extend({
         'signup': 'createAccount',
         'login': 'login',
         'events': 'showEvents',
+        'events/:id': 'eventDetails',
         'events/new': 'createEvent'
     },
 
@@ -109,6 +110,15 @@ app.Router = Backbone.Router.extend({
                 console.log(xhr.responseText);
             }
         });
+    },
+
+    eventDetails: function(eventId) {
+        var model = app.Events.get(eventId);
+        console.log(model);
+        if (model) {
+            var detailsView = new app.EventDetailsView({model: model});
+            this.showView(detailsView);
+        }
     }
 });
 
@@ -157,7 +167,7 @@ $(document).on('ready', function () {
     // });
 
     app.loadTemplates([
-           'HomeView', 'EventsView', 'AccountView', 'EventView', 'LoginView', 'CreateEventView'
+           'HomeView', 'EventsView', 'AccountView', 'EventView', 'LoginView', 'CreateEventView', 'EventDetailsView'
         ],
         function () {
             app.router = new app.Router();

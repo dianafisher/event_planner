@@ -5,9 +5,17 @@
 
 app.Event = Backbone.Model.extend({
     // Default attributes for the event
-    // and ensure that each todo created has `title` and `completed` keys.
+    // and ensure that each event created all keys.
     defaults: {
-        title: '',
-        completed: false
+        name: 'Untitled Event',
+        startDate: '',
+        startTime: '',
+        endDate: '',
+        endTime: '',
+        location: '',
+        type: '',
+        host: '',
+        guests: '',
+        message: ''
     }
 });
