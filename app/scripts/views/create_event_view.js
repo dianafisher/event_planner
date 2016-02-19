@@ -19,8 +19,8 @@ app.CreateEventView = Backbone.View.extend({
         'blur #endTime': 'validateEndTime',
         'blur #inputLocation': 'validateLocation',
         'blur #inputType': 'validateType',
-        'blur #inputHost': 'validateHost',
-        'blur #inputGuests': 'validateGuests',
+        'blur #inputHost': 'validateHost',        
+        'click #add_guest': 'addGuest',
 
         'submit': 'createEvent'
     },
@@ -28,6 +28,7 @@ app.CreateEventView = Backbone.View.extend({
     initialize: function () {
         console.log('login view initialize');
         this.nameHasErrors = false;
+        this.guestList = [];
     },
 
     render: function () {
@@ -199,16 +200,28 @@ app.CreateEventView = Backbone.View.extend({
     },
 
     validateGuests: function(e) {
-        this.eventGuests = this.$('#inputGuests').val();
-        console.log(this.eventGuests);
+        if (this.guestList.length === 0) {
+            this.$('#guests-help').html('Please enter an email address for each guest.');
+            this.guestsHasErrors = true;
+        }
+        else {
+            this.$('#guests-group').removeClass('has-error');
+            this.$('#guests-help').html('');
+            this.guestsHasErrors = false;
+        }
+    },
 
-        var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;        
+    addGuest: function(e) {
+       var guest = this.$('#inputGuests').val();
+       console.log('adding', guest);
 
-        if (this.eventGuests.length == 0) {
+       var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;        
+
+        if (guest.length == 0) {
             this.$('#guests-group').addClass('has-error');
             this.$('#guests-help').html('Please enter an email address for each guest.');
             this.guestsHasErrors = true;
-        } else if (!re.test(this.eventGuests)) {
+        } else if (!re.test(guest)) {
             this.$('#guests-group').addClass('has-error');
             this.$('#guests-help').html('Please enter a valid email address.');
             this.guestsHasErrors = true;
@@ -216,6 +229,9 @@ app.CreateEventView = Backbone.View.extend({
             this.$('#guests-group').removeClass('has-error');
             this.$('#guests-help').html('');
             this.guestsHasErrors = false;
+            // Add the email address to the guest list.
+            this.guestList.push(guest);
+            this.$('#guest_list').append('<li id="guest_item">' + guest + '</li>');
         }
     },
 
@@ -242,7 +258,7 @@ app.CreateEventView = Backbone.View.extend({
             location: this.eventLocation,
             type: this.eventType,
             host: this.eventHost,
-            guests: this.eventGuests,
+            guests: this.guestList,
             message: message
         };
         app.Events.create(attributes);
