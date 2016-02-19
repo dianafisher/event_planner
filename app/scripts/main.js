@@ -41,8 +41,8 @@ app.Router = Backbone.Router.extend({
         'signup': 'createAccount',
         'login': 'login',
         'events': 'showEvents',
-        'events/:id': 'eventDetails',
-        'events/new': 'createEvent'
+        'events/new': 'createEvent',
+        'events/show/:id': 'eventDetails'
     },
 
     initialize: function() {

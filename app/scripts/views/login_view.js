@@ -15,12 +15,12 @@ app.LoginView = Backbone.View.extend({
     },
 
     initialize: function () {
-        console.log('login view initialize');        
+        console.log('login view initialize');
     },
 
     render: function () {
         console.log('render LoginView');
-        this.$el.html(this.template());       
+        this.$el.html(this.template());
         
         return this;
     },
@@ -35,9 +35,11 @@ app.LoginView = Backbone.View.extend({
             password: password
         }, function(error, authData) {
             if (error) {
-                console.log('login failed!', error);
+                console.log('login failed!', error);                
+                self.$('#login-help').html('Failed to log in.  Please try again.');
             } else {
                 console.log('Authenticated successfully with payload:', authData);
+                self.$('#login-help').html('Success!  Redirecting...');
                 self.redirect();
             } 
         }, {
