@@ -67,11 +67,11 @@ app.EventDetailsView = Backbone.View.extend({
         var eventIcon = this.iconForType(type);
 
         this.model.attributes.event_icon = eventIcon;
-        
-        // console.log(this.model.attributes);
-        // console.log(this.model.attributes.name);
+                
         this.model.attributes.dateStr = this.formatDate(this.model.attributes.startDate);
         this.model.attributes.timeStr = this.formatTime(this.model.attributes.startTime);
+        this.model.attributes.endDateStr = this.formatDate(this.model.attributes.endDate);
+        this.model.attributes.endTimeStr = this.formatTime(this.model.attributes.endTime);
         this.$el.html(this.template(this.model.attributes));
 
         return this;
